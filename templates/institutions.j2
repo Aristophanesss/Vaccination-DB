@@ -1,0 +1,49 @@
+<html>
+
+    <head>
+        <title>Institutions Page</title>
+    </head>
+
+    <body>
+        <h1>Institutions</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    {% for key in data[0].keys() %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for item in data %}
+                <tr>
+                    {% for key in item.keys() %}
+                    <td> {{item[key]}} </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        
+        <div>
+        <form id="Add_institutions" action='/institutions' method="POST">
+            <p><strong>Add an institution</strong></p>
+            <fieldset>
+                <label> Institution Name </label> <input type="text" id="Institution" name="Institution">
+                <label> Public </label> 
+                <select class="form-control" id="Public" name="Public" pattern="[0-4]{1}" placeholder="" required> 
+                        <option value=1 selected> Yes</option>
+                        <option value=0> No</option>
+                </select>
+            </fieldset>
+            <br>
+            <input type="submit" value="Submit" id="addInstitutions" name="Add_institutions" class="btn btn-primary">
+            <input type="button" value="Cancel" onclick="document.getElementById('Institution').value='', document.getElementById('Public').value=''"/>
+        </form>
+        </div>
+        <br/>
+        <a href="index">Back to HomePage</a>
+    </body>
+
+</html>

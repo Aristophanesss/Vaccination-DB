@@ -1,0 +1,94 @@
+<html>
+
+    <head>
+        <title>Editing Inventories</title>
+    </head>
+
+    <body>
+        <p><strong>Current Information</strong></p>
+        <table border="1">
+            <thead>
+                <tr>
+                    {% for key in data1[0].keys() %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for item in data1 %}
+                <tr>
+                    {% for key in item.keys() %}
+                    <td> {{item[key]}} </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div>
+        <p><strong>Update Inventory</strong></p>
+        <p>Tips: Please note the relationship between the target disease and the vaccine manufacturer; entering a mismatched relationship will result in an error. You can refer to the table below, or you can add new <a href="vaccines">vaccines</a> in the corresponding page.</p>
+        <form id="Edit_inventory" action='/edit_inventories/{{data1[0].institutionID}}/{{data1[0].vaccineID}}' method="POST">
+            <fieldset>
+                <label> Institution Name </label>
+                <select class="form-control" id="Institution" name="Institution" pattern="[0-4]{1}" placeholder="" required> 
+                    {% for data2 in data2 %}
+                        {% if data2['institutionName'] == data1[0].institutionName %}
+                            <option value="{{ data2['institutionName']}}" selected> {{data2['institutionName']}}</option>
+                        {% else %}
+                            <option value="{{ data2['institutionName']}}"> {{data2['institutionName']}}</option>
+                        {% endif %}
+                    {% endfor %} 
+                </select>
+
+                <label> Vaccine </label>
+                <select class="form-control" id="Vaccine" name="Vaccine" pattern="[0-4]{1}" placeholder="" required> 
+                    {% for data4 in data4 %}
+                        {% if data4['targetDisease'] == data1[0].targetDisease %}
+                            <option value="{{ data4['targetDisease']}}" selected> {{data4['targetDisease']}}</option>
+                        {% else %}
+                            <option value="{{ data4['targetDisease']}}"> {{data4['targetDisease']}}</option>
+                        {% endif %}
+                    {% endfor %} 
+                </select>
+
+                <label> Vaccine Manufacturer </label>
+                <select class="form-control" id="Manufacturer" name="Manufacturer" pattern="[0-4]{1}" placeholder="" required> 
+                    {% for data5 in data5 %}
+                        {% if data5['vaccineManufacturer'] == data1[0].vaccineManufacturer %}
+                            <option value="{{ data5['vaccineManufacturer']}}" selected> {{data5['vaccineManufacturer']}}</option>
+                        {% else %}
+                            <option value="{{ data5['vaccineManufacturer']}}"> {{data5['vaccineManufacturer']}}</option>
+                        {% endif %}
+                    {% endfor %} 
+                </select>
+            </fieldset>
+            <br>
+            <input type="submit" value="Submit" id="Edit_inventory" name="Edit_inventory" class="btn btn-primary">
+            <input type="button" value="Cancel" onclick="document.getElementById('Institution').value='', document.getElementById('Vaccine').value='', document.getElementById('Manufacturer').value=''"/>
+        </form>
+        </div>
+        <a href="http://flip1.engr.oregonstate.edu:9466/inventories"><strong>Back to Inventories</strong></a>
+        <p><strong>Presence of vaccines</strong></p>
+        <table border="1">
+            <thead>
+                <tr>
+                    {% for key in data3[0].keys() %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for item in data3 %}
+                <tr>
+                    {% for key in item.keys() %}
+                    <td> {{item[key]}} </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

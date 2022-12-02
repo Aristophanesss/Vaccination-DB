@@ -1,0 +1,47 @@
+<html>
+
+    <head>
+        <title>Residents Page</title>
+    </head>
+
+    <body>
+        <h1>Residents</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    {% for key in data[0].keys() %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in data %}
+                <tr>
+                    {% for key in item.keys() %}
+                    <td> {{item[key]}} </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+              </tbody> 
+        </table>
+
+        <div>
+        <form id="Add_resident" action='/residents' method="POST">
+            <p><strong>Add a new resident</strong></p>
+            <p>Tips: Allergy & Disease history are <i>NULLable</i></p>
+            <fieldset>
+                <label> Name </label> <input type="text" name="Name" id="Name">
+                <label> Date of birth </label> <input type="Date" name="Date" id="Date" value="2000-01-01">
+                <label> Allergy history </label> <input type="text" name="Allergy" id="Allergy">
+                <label> Disease history </label> <input type="text" name="Disease" id="Disease">
+            </fieldset>
+            <br>
+            <input type="submit" value="Submit" id="addResidents" name="Add_resident" class="btn btn-primary">
+            <input type="button" value="Cancel" onclick="document.getElementById('Name').value='', document.getElementById('Date').value='', document.getElementById('Allergy').value='', document.getElementById('Disease').value=''"/>
+        </form>
+        </div>
+        <br/>
+        <a href="index">Back to HomePage</a>
+    </body>
+
+</html>

@@ -1,0 +1,88 @@
+<html>
+
+    <head>
+        <title>Inventories Page</title>
+    </head>
+
+    <body>
+        <h1>Inventories</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    {% for key in data[0].keys() %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for item in data %}
+                <tr>
+                    {% for key in item.keys() %}
+                    <td> {{item[key]}} </td>
+                    {% endfor %}
+                    <td><a href="/edit_inventories/{{item.institutionID}}/{{item.vaccineID}}" class="btn btn-default">Edit</a></td>
+                    <td><a href="/delete_inventories/{{item.institutionID}}/{{item.vaccineID}}" class="btn btn-default">Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+        <div>
+        <form id="Add_inventory" action='/inventories' method="POST">
+            <p><strong>Add an inventory</strong></p>
+            <p>Tips: Please note the relationship between the target disease and the vaccine manufacturer; entering a mismatched relationship will result in an error. You can refer to the table below, or you can add new <a href="vaccines">vaccines</a> in the corresponding page.</p>
+            <fieldset>
+                <label> Institution Name </label>
+                <select class="form-control" id="Institution" name="Institution" pattern="[0-4]{1}" placeholder="" required> 
+                    {% for institutionName in institutionName %}
+                            <option value="{{ institutionName['institutionName']}}"> {{institutionName['institutionName']}}</option>
+                    {% endfor %} 
+                </select>
+
+                <label> Vaccine </label>
+                <select class="form-control" id="Vaccine" name="Vaccine" pattern="[0-4]{1}" placeholder="" required> 
+                    {% for target in target %}
+                            <option value="{{ target['targetDisease']}}"> {{target['targetDisease']}}</option>
+                    {% endfor %} 
+                </select>
+
+                <label> Vaccine Manufacturer </label>
+                <select class="form-control" id="Manufacturer" name="Manufacturer" pattern="[0-4]{1}" placeholder="" required> 
+                    {% for manufacturer in manufacturer %}
+                            <option value="{{ manufacturer['vaccineManufacturer']}}"> {{manufacturer['vaccineManufacturer']}}</option>
+                    {% endfor %} 
+                </select>
+            </fieldset>
+            <br>
+            <input type="submit" value="Submit" id="addInventory" name="Add_inventory" class="btn btn-primary">
+            <input type="button" value="Cancel" onclick="document.getElementById('Institution').value='', document.getElementById('Vaccine').value='', document.getElementById('Manufacturer').value=''"/>
+        </form>
+        </div>
+        <br/>
+        <a href="index"><strong>Back to HomePage</strong></a>
+        <p><strong>Presence of vaccines</strong></p>
+        <table border="1">
+            <thead>
+                <tr>
+                    {% for key in vacc[0].keys() %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for item in vacc %}
+                <tr>
+                    {% for key in item.keys() %}
+                    <td> {{item[key]}} </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+
+    <head>
+        <title>Vaccines Page</title>
+    </head>
+
+    <body>
+        <h1>Vaccines</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    {% for key in data[0].keys() %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for item in data %}
+                <tr>
+                    {% for key in item.keys() %}
+                    <td> {{item[key]}} </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div>
+        <form id="Add_vaccine" action='/vaccines' method="POST">
+            <p><strong>Add a new vaccine</strong></p>
+            <fieldset>
+                <label> Target Disease </label> <input type="text" name="Name" id="Name">
+                <label> Type </label> <input type="text" name="Type" id="Type">
+                <label> Manufacturer </label> <input type="text" name="Manufacturer" id="Manufacturer">
+            </fieldset>
+            <br>
+            <input type="submit" value="Submit" id="addVaccines" name="Add_vaccine" class="btn btn-primary">
+            <input type="button" value="Cancel" onclick="document.getElementById('Name').value='', document.getElementById('Type').value='', document.getElementById('Manufacturer').value=''"/>
+        </form>
+        </div>
+        <br/>
+        <a href="index">Back to HomePage</a>
+    </body>
+
+</html>
