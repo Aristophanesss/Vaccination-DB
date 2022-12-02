@@ -1,6 +1,7 @@
 # Vaccination-DB
 
 _Overview_
+
 Vaccination DB is a database that records local vaccination information. It is a database created jointly by local institutions and used to provide residents with clearer information about vaccines. In this neighborhood, there are 1300 residents, 8 vaccination institutions, and 21 vaccines. This also means that up to 30,000 vaccination records need to be stored. A database-driven website will provide basic information on vaccines and vaccination institutions. It will also store basic resident information and vaccination records.
 
 A total of 4 basic entities will be created in the database, including Residents, Vaccines, Institutions, and Records. Each of these entities, according to their names, will be reasonable for recording the corresponding data. The connection table Inventories connecting two entities as an adjunct to the M:N relationship for vaccines and institutions.
